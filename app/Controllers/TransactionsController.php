@@ -4,32 +4,32 @@ declare(strict_types = 1);
 
 namespace App\Controllers;
 
-use App\Helpers\Debug;
 use App\Models\Transaction;
+use App\Services\TransactionService;
 use App\View;
 
 class TransactionsController
 {
     private Transaction $transactionModel;
+    private TransactionService $transactionService;
 
     public function __construct()
     {
         $this->transactionModel = new Transaction();
+        $this->transactionService = new TransactionService($this->transactionModel);
     }
 
     public function index(): View
     {
         $transactions = $this->transactionModel->getAll();
-        $totals = $this->transactionModel->calculateTotals($transactions);
+        $totals = $this->transactionService->calculateTotals($transactions);
 
         return View::make('transactions', ['transactions' => $transactions, 'totals' => $totals]);
     }
 
-    public function upload()
+    public function upload(): void
     {
-        $files = $_FILES['files'];
-
-        $this->transactionModel->upload($files);
+        $this->transactionService->upload($_FILES);
 
         header('Location: /transactions/');
     }
