@@ -21,6 +21,15 @@
             tfoot tr th {
                 text-align: right;
             }
+            .text-danger {
+                color: red;
+            }
+            .text-success {
+                color: green;
+            }
+            .text-normal {
+                color: grey;
+            }
         </style>
     </head>
     <body>
@@ -34,20 +43,29 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- TODO -->
+                <?php if (! empty($transactions)) : ?>
+                    <?php foreach ($transactions as $transaction) : ?>
+                        <tr>
+                            <td><?= $transaction['date'] ?></td>
+                            <td><?= $transaction['checkNumber'] ?></td>
+                            <td><?= $transaction['description'] ?></td>
+                            <td class="<?= $transaction['amountClass']?>"><?= $transaction['amount'] ?></td>
+                        </tr>
+                    <?php endforeach ?>
+                <?php endif ?>
             </tbody>
             <tfoot>
                 <tr>
                     <th colspan="3">Total Income:</th>
-                    <td><!-- TODO --></td>
+                    <td><?= $totals['totalIncome'] ?? 0 ?></td>
                 </tr>
                 <tr>
                     <th colspan="3">Total Expense:</th>
-                    <td><!-- TODO --></td>
+                    <td><?= $totals['totalExpense'] ?? 0 ?></td>
                 </tr>
                 <tr>
                     <th colspan="3">Net Total:</th>
-                    <td><!-- TODO --></td>
+                    <td><?= $totals['netTotal'] ?? 0 ?></td>
                 </tr>
             </tfoot>
         </table>
