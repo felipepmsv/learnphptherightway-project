@@ -1,10 +1,12 @@
 <?php
 
-require_once '../PaymentGateway/Stripe/Transaction.php';
-require_once '../PaymentGateway/Paddle/Transaction.php';
-require_once '../PaymentGateway/Paddle/CustomerProfile.php';
-require_once '../Notification/Email.php';
+require_once '../app/PaymentGateway/Stripe/Transaction.php';
+require_once '../app/PaymentGateway/Paddle/Transaction.php';
+require_once '../app/PaymentGateway/Paddle/CustomerProfile.php';
+require_once '../app/Notification/Email.php';
 
-use PaymentGateway\Paddle\Transaction;
+use App\PaymentGateway\Paddle\Transaction;
 
-var_dump(new Transaction());
+$paddleTransaction = new Transaction();
+
+var_dump($paddleTransaction);
