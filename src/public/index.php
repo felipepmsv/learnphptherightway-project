@@ -8,4 +8,4 @@ $transaction = new Transaction();
 
 //echo $transaction::STATUS_PAID;
 
-echo $transaction::class;
+echo Transaction::class;
