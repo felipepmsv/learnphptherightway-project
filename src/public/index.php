@@ -4,6 +4,7 @@ use App\PaymentGateway\Paddle\Transaction;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-//$transaction = new Transaction();
+$transaction = new Transaction();
 
-echo Transaction::STATUS_PAID;
+//echo $transaction::STATUS_PAID;
+//echo Transaction::STATUS_PAID;
