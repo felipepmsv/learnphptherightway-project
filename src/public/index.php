@@ -1,13 +1,9 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
-
 use App\PaymentGateway\Paddle\Transaction;
 
-$paddleTransaction = new Transaction();
+require_once __DIR__ . '/../vendor/autoload.php';
 
-$id = new \Ramsey\Uuid\UuidFactory();
+//$transaction = new Transaction();
 
-echo $id->uuid4();
-
-var_dump($paddleTransaction);
+echo Transaction::STATUS_PAID;
