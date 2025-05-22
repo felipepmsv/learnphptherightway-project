@@ -6,6 +6,6 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $transaction = new Transaction();
 
-//echo $transaction::STATUS_PAID;
+$transaction->setStatus(Transaction::STATUS_PAID);
 
-echo Transaction::class;
+var_dump($transaction);
