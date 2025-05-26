@@ -4,7 +4,12 @@ namespace App;
 
 class ToasterPro extends Toaster
 {    
-    protected int   $size = 4;
+    public function __construct()
+    {     
+        parent::__construct(); // Call the parent constructor to initialize slices
+        
+        $this->size = 4;
+    }
 
     public function toastBagel()
     {
