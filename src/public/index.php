@@ -1,22 +1,13 @@
 <?php
 
-use App\PaymentGateway\Paddle\Transaction;
+use App\Toaster;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$transaction = new Transaction(25);
+$toaster = new Toaster();
 
-//$transaction->amount;  // propriedade privada, não pode ser acessada diretamente
+$toaster->addSlice('bread');
+$toaster->addSlice('bread');
+$toaster->addSlice('bread');
 
-// Para acessar a propriedade privada, podemos usar ReflectionProperty
-$reflectionProperty = new ReflectionProperty(Transaction::class, 'amount');
-$reflectionProperty->setAccessible(true);
-var_dump($reflectionProperty->getValue($transaction));
-echo '<br>';
-
-// Agora o valor foi alterado
-$reflectionProperty->setValue($transaction, 50);
-var_dump($reflectionProperty->getValue($transaction));
-echo '<br>';
-
-$transaction->process();
+$toaster->toast();
