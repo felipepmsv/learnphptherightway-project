@@ -9,4 +9,9 @@ class Invoice
     {
         var_dump($name); 
     }
+
+    public function __set($name, $value): void
+    {
+        var_dump($name, $value);
+    }
 }
