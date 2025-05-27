@@ -2,7 +2,7 @@
 
 namespace App;
 
-class Boolean extends Field
+abstract class Boolean extends Field
 {
 
 }

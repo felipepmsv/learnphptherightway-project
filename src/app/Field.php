@@ -2,15 +2,14 @@
 
 namespace App;
 
-class Field 
+// Essa classe não deve ser instanciada diretamente, mas sim estendida por outras classes.
+abstract class Field 
 {
     public function __construct(protected string $name)
     {
         
     }
 
-    public function render(): string
-    {
-        return '';
-    }
+    // Esse metodo deve ser implementado por todas as classes que estendem Field.
+    abstract public function render(): string;
 }

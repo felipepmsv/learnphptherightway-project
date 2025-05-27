@@ -2,10 +2,8 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$fields = [
-    new \App\Field('baseField'),
-    new \App\Text('textField'),
-    new \App\Boolean('booleanField'),
+$fields = [    
+    new \App\Text('textField'),    
     new \App\Checkbox('checkboxField'),
     new \App\Radio('radioField'),
 ];
