@@ -4,14 +4,28 @@ namespace App;
 
 class Invoice
 {
-    // Magic method to handle dynamic property access
-    public function __get($name)
+    protected float $amount;    
+
+    public function __construct(float $amount = 0.0)
     {
-        var_dump($name); 
+        $this->amount = $amount;
     }
 
-    public function __set($name, $value): void
-    {
-        var_dump($name, $value);
-    }
+    // Esses dois metodos quebram o encapsulamento !!!
+    
+    // public function __get($name)
+    // {
+    //     if(property_exists($this, $name)) {
+    //         return $this->$name;
+    //     }
+
+    //     return null;
+    // }
+
+    // public function __set($name, $value): void
+    // {
+    //     if(property_exists($this, $name)) {
+    //         $this->$name = $value;
+    //     }
+    // }
 }
