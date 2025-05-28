@@ -4,28 +4,21 @@ namespace App;
 
 class Invoice
 {
-    protected float $amount;    
+    protected array $data;
 
-    public function __construct(float $amount = 0.0)
+    // Continuam quebrando o encapsulamento !!!
+    
+    public function __get(string $name)
     {
-        $this->amount = $amount;
+        if(array_key_exists($name, $this->data)) {
+            return $this->data[$name];
+        }
+
+        return null;
     }
 
-    // Esses dois metodos quebram o encapsulamento !!!
-    
-    // public function __get($name)
-    // {
-    //     if(property_exists($this, $name)) {
-    //         return $this->$name;
-    //     }
-
-    //     return null;
-    // }
-
-    // public function __set($name, $value): void
-    // {
-    //     if(property_exists($this, $name)) {
-    //         $this->$name = $value;
-    //     }
-    // }
+    public function __set($name, $value): void
+    {
+        $this->data[$name] = $value;
+    }
 }
