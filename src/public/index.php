@@ -4,4 +4,6 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $invoice = new App\Invoice();
 
-var_dump($invoice instanceof Stringable);
+var_dump(is_callable($invoice)); // true
+
+$invoice();
