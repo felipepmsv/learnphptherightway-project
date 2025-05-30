@@ -4,8 +4,10 @@ namespace App;
 
 trait LatteTrait
 {
+    protected string $milkType = 'whole-milk';
+
     public function makeLatte()
     {
-        echo static::class . ' is making latte.' . PHP_EOL;
+        echo static::class . ' is making latte with ' . $this->milkType . PHP_EOL;
     }
 }
