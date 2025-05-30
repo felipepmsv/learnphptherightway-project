@@ -5,5 +5,7 @@ namespace App;
 class AllInOneCoffeeMaker extends CoffeeMaker
 {
     use LatteTrait;
-    use CappuccinoTrait;
+    use CappuccinoTrait {
+        CappuccinoTrait::makeLatte insteadof LatteTrait;
+    }
 }
