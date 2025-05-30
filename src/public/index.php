@@ -16,4 +16,5 @@ $cappuccinoMaker->makeCappuccino();
 $allInOneCoffeeMaker = new \App\AllInOneCoffeeMaker();
 $allInOneCoffeeMaker->makeCoffee();
 $allInOneCoffeeMaker->makeLatte();
+$allInOneCoffeeMaker->makeOriginalLatte();
 $allInOneCoffeeMaker->makeCappuccino();
