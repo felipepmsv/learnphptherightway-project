@@ -4,4 +4,4 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $obj = new class {};
 
-var_dump($obj);
+var_dump(get_class($obj));
