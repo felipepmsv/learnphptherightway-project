@@ -6,9 +6,15 @@ namespace App;
 
 class Invoice
 {
-    public ?Invoice $linkedInvoice = null;
+    private string $id;
 
-    public function __construct(public Customer $customer, public float $amount, public string $description) 
+    public function __construct()
     {
+        $this->id = uniqid('invoice_');
+    }
+
+    public static function create(): static
+    {
+        return new static();
     }
 }
