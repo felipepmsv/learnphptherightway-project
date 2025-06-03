@@ -1,10 +1,14 @@
 <?php
 
+use App\Invoice;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$invoice = new \App\Invoice();
+$invoice = new Invoice(25, 'Invoice 1', '123456789123456');
 
-$invoice2 = clone $invoice; // clona o objeto, criando uma nova instância
+$str = serialize($invoice);
 
+$invoice2 = unserialize($str);
 
-var_dump($invoice, $invoice2, $invoice === $invoice2); // retorna false
+//echo $str . PHP_EOL;
+var_dump($invoice2);
