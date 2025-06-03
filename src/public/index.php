@@ -7,4 +7,4 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $invoice = new Invoice(new Customer());
 
-$invoice->process(-25);
+$invoice->process(25);

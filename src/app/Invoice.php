@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Exception\MissingBillingInfoException;
+
 class Invoice
 {
     public function __construct(public Customer $customer)
@@ -13,7 +15,11 @@ class Invoice
     public function process(float $amount): void
     {
         if($amount <= 0) {
-            throw new \Exception('Invalid invoice amount.');
+            throw new \InvalidArgumentException('Invalid invoice amount.');
+        }
+
+        if(empty($this->customer->getBillingInfo())) {
+            throw new MissingBillingInfoException();
         }
         
         echo 'Processing $' . $amount . ' invoice - ';
