@@ -5,13 +5,17 @@ use App\Invoice;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$invoice = new Invoice(new Customer());
+$invoice = new Invoice(new Customer(['foo' => 'bar']));
 
 try 
 {
     $invoice->process(25);
 } 
-catch (App\Exception\MissingBillingInfoException $e) 
+catch (\Exception $e) 
 {
-    echo $e->getMessage() . ' ' . $e->getFile() . ':' . $e->getLine() . PHP_EOL;
+    echo $e->getMessage() . PHP_EOL;
+}
+finally 
+{
+    echo 'Finally block' . PHP_EOL;
 }
