@@ -1,10 +1,11 @@
 <?php
 
-use App\Customer;
-use App\Invoice;
-
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$invoice = new Invoice(new Customer());
+$dateTime = new DateTime('00:00');
 
-$invoice->process(-25);
+echo $dateTime->format('d/m/Y H:i') . ' - ' . $dateTime->getTimeZone()->getName() . PHP_EOL;
+
+$dateTime->setTimezone(new DateTimeZone('Europe/Lisbon'));
+
+echo $dateTime->format('d/m/Y H:i') . ' - ' . $dateTime->getTimeZone()->getName() . PHP_EOL;
