@@ -5,17 +5,12 @@ use App\Invoice;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$invoice = new Invoice(new Customer(['foo' => 'bar']));
+set_exception_handler(function(\Throwable $e) {
+    var_dump($e->getMessage());
+});
 
-try 
-{
-    $invoice->process(25);
-} 
-catch (\Exception $e) 
-{
-    echo $e->getMessage() . PHP_EOL;
-}
-finally 
-{
-    echo 'Finally block' . PHP_EOL;
-}
+echo array_rand([], 1);
+
+$invoice = new Invoice(new Customer());
+
+$invoice->process(25);
