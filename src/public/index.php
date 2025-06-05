@@ -2,6 +2,24 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-foreach(new App\Invoice(25) as $key => $value) {
-    echo $key . ' => ' . $value . PHP_EOL;
-}
+// echo '<pre>';
+// print_r($_SERVER);
+// echo '</pre>';
+
+$router = new \App\Router();
+
+$router->register(
+    '/',
+    function () {
+        echo 'Home';
+    }
+);
+
+$router->register(
+    '/invoices',
+    function () {
+        echo 'Invoices';
+    }
+);
+
+echo $router->resolve($_SERVER['REQUEST_URI']);
