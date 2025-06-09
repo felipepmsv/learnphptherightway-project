@@ -8,13 +8,19 @@ class Home
 {
     public function index(): string
     {
-        setcookie(
-            'userName',
-            'Gio',
-            time() + 10 // Cookie expires in 10 seconds
-        );
+        return <<<FORM
+        <form action="/upload" method="post" enctype="multipart/form-data">            
+            <input type="file" name="receipt" />
+            <button type="submit">Upload</button>
+        </form>
+        FORM;
+    }
 
-        return 'Home ';
+    public function upload()
+    {
+        echo '<pre>';
+        var_dump($_FILES);
+        echo '</pre>';
     }
 
 }
