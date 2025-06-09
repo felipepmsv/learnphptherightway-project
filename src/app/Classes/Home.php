@@ -10,8 +10,8 @@ class Home
     {
         return <<<FORM
         <form action="/upload" method="post" enctype="multipart/form-data">            
-            <input type="file" name="receipt" />
-            <input type="file" name="myimage" />
+            <input type="file" name="receipt[]" />
+            <input type="file" name="receipt[]" />
             <button type="submit">Upload</button>
         </form>
         FORM;
