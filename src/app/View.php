@@ -24,6 +24,16 @@ class View
         {
             throw new ViewNotFoundException();
         }        
+
+        // Extraindo os parâmetros para o escopo da view
+        // para que possamos acessá-los diretamente
+        // ao invés de usar $this->params['foo']
+
+        extract($this->params);
+
+        // foreach ($this->params as $key => $value) {
+        //     ${$key} = $value; // cria uma variável com o nome do parâmetro (vide Variable variables)
+        // }
         
         ob_start();
 
