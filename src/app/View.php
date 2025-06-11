@@ -40,4 +40,13 @@ class View
         return $this->render();
     }
 
+    // Sobreescrevendo o método __get,
+    // para que possamos acessar os parâmetros da view
+    // ao invés de usar $this->params['foo']
+    // na index.php
+    public function __get(string $name): mixed
+    {        
+        return $this->params[$name] ?? null;        
+    }
+
 }
