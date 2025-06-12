@@ -26,5 +26,6 @@ try
 }
 catch (\App\Exception\RouteNotFoundException $e)
 {   
-    echo $e->getMessage();
+    header('HTTP/1.0 404 Not Found');  // Define o código de status HTTP 404
+    echo \App\View::make('error/404'); // Renderiza a view de erro 404   
 }
