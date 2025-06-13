@@ -12,18 +12,18 @@ class HomeController
     public function index(): View
     {
         try 
-        {
-            // o nome do host é o mesmo do serviço criado no docker-compose.yml
-            // referente ao banco de dados
-            $db = new PDO('mysql:host=db;dbname=my_db', 'root', 'root', [                
-                // desta forma, o fetchAll retorna um array de objetos
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ                
-            ]);
+        {            
+            $db = new PDO('mysql:host=db;dbname=my_db', 'root', 'root', []);
 
-            $query = 'SELECT * FROM users';
+            // Criando uma situação de SQL Injection
+            // A URL de exemplo para testar a injeção SQL seria:
+            // http://localhost:8000/?email=foo@bar.com%22+OR+1=1+--+
+            $email = $_GET['email'];
+            $query = 'SELECT * FROM users WHERE email = "' . $email . '"';
+
+            echo $query . '<br><br>';
             
-            foreach($db->query($query) as $user)             
-            //foreach($db->query($query)->fetchAll(PDO::FETCH_OBJ) as $user) // retorna um array de objetos            
+            foreach($db->query($query) as $user)            
             {
                 echo '<pre>';
                 var_dump($user);
