@@ -15,16 +15,22 @@ class HomeController
         {
             // o nome do host é o mesmo do serviço criado no docker-compose.yml
             // referente ao banco de dados
-            $db = new PDO('mysql:host=db;dbname=my_db', 'root', 'root');
+            $db = new PDO('mysql:host=db;dbname=my_db', 'root', 'root', []);
 
-            var_dump($db);
+            $query = 'SELECT * FROM users';
 
-            return View::make('index');
+            $stmt = $db->query($query);
+
+            var_dump($stmt->fetchAll());
         } 
         catch (\PDOException $e) 
         {
             throw new \PDOException($e->getMessage(), $e->getCode());
         }
+
+        var_dump($db);
+
+        return View::make('index');
         
     }
 
