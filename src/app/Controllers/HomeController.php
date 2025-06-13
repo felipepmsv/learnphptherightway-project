@@ -11,13 +11,21 @@ class HomeController
 {
     public function index(): View
     {
-        // o nome do host é o mesmo do serviço criado no docker-compose.yml
-        // referente ao banco de dados
-        $db = new PDO('mysql:host=db;dbname=my_db', 'root', 'root');
+        try 
+        {
+            // o nome do host é o mesmo do serviço criado no docker-compose.yml
+            // referente ao banco de dados
+            $db = new PDO('mysql:host=db;dbname=my_db', 'root', 'root');
 
-        var_dump($db);
+            var_dump($db);
 
-        return View::make('index');
+            return View::make('index');
+        } 
+        catch (\PDOException $e) 
+        {
+            throw new \PDOException($e->getMessage(), $e->getCode());
+        }
+        
     }
 
 }
