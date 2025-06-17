@@ -13,7 +13,14 @@ class HomeController
     public function index(): View
     {
         // Obtém a instância do banco de dados
-        $db = App::db();
+        $db1 = App::db();
+        $db2 = App::db();
+        $db3 = App::db();
+
+        // Verifica se as instâncias são iguais
+        // Isso deve retornar true, pois todas as chamadas retornam a mesma instância        
+        var_dump($db1 === $db2, $db2 === $db3, $db1 === $db3);
+        exit;
 
         $email = 'jaba@doe.com';
         $name = 'Jaba Doe';
