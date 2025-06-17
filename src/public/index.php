@@ -2,7 +2,11 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-session_start();
+// Carrega as variáveis de ambiente do arquivo .env
+// Certifique-se de que o pacote vlucas/phpdotenv 
+// está instalado via Composer no docker !!!
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
 
 define('STORAGE_PATH', __DIR__ . '/../storage');
 define('VIEW_PATH', __DIR__ . '/../views');

@@ -11,6 +11,9 @@ class HomeController
 {
     public function index(): View
     {
+        var_dump($_ENV['DB_HOST']);
+        exit;
+
         try 
         {            
             $db = new PDO('mysql:host=db;dbname=my_db', 'root', 'root', []);
@@ -42,8 +45,6 @@ class HomeController
 
             $userId = (int) $db->lastInsertId();
 
-            throw new \Exception('Simulated exception for testing rollback');
-
             $newInvoiceStmt->execute([$amount, $userId]);
 
             $db->commit();
@@ -54,6 +55,8 @@ class HomeController
             {
                 $db->rollBack();
             }            
+
+            throw $e;
         }
 
 
