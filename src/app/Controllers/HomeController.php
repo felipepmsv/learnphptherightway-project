@@ -11,20 +11,22 @@ class HomeController
 {
     public function index(): View
     {
-        var_dump($_ENV['DB_HOST']);
-        exit;
-
         try 
         {            
-            $db = new PDO('mysql:host=db;dbname=my_db', 'root', 'root', []);
+            $db = new PDO(
+                'mysql:host='. $_ENV['DB_HOST'] . ';dbname='. $_ENV['DB_DATABASE'], 
+                $_ENV['DB_USER'], $_ENV['DB_PASS']
+            );
+
+            //$db = new PDO('mysql:host=db;dbname=my_db', 'root', 'root', []);
         } 
         catch (\PDOException $e) 
         {
             throw new \PDOException($e->getMessage(), (int) $e->getCode());
         }
 
-        $email = 'jenniffer@doe.com';
-        $name = 'Jenniffer Doe';
+        $email = 'josef@doe.com';
+        $name = 'Josef Doe';
         $amount = 25;
 
         try 
