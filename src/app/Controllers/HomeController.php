@@ -20,8 +20,8 @@ class HomeController
             throw new \PDOException($e->getMessage(), (int) $e->getCode());
         }
 
-        $email = 'jax@doe.com';
-        $name = 'Jax Doe';
+        $email = 'jenniffer@doe.com';
+        $name = 'Jenniffer Doe';
         $amount = 25;
 
         try 
@@ -41,6 +41,8 @@ class HomeController
             $newUserStmt->execute([$email, $name]);
 
             $userId = (int) $db->lastInsertId();
+
+            throw new \Exception('Simulated exception for testing rollback');
 
             $newInvoiceStmt->execute([$amount, $userId]);
 
