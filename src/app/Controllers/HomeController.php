@@ -12,4 +12,11 @@ class HomeController
     {
         return View::make('index');
     }
+
+    public function upload()
+    {
+        echo '<pre>';
+        var_dump($_FILES);
+        echo '</pre>';
+    }
 }
