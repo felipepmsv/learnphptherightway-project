@@ -34,20 +34,56 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- TODO -->
+                <?php if(!empty($transactions)) { $totalExpense = 0; $totalIncome = 0; ?>
+                    <?php foreach($transactions as $transaction)
+                    {
+                        $date = date('M j, Y', strtotime($transaction[0]));
+                        $checkNumber = htmlspecialchars($transaction[1]);
+                        $description = htmlspecialchars($transaction[2]);
+                        $amount = htmlspecialchars($transaction[3]);
+                        $amount = str_replace('$', '', $amount);
+                        $amount = str_replace(',', '', $amount);                        
+                    ?>
+                        <tr>
+                            <td><?php echo $date; ?></td>
+                            <td><?php echo $checkNumber; ?></td>
+                            <td><?php echo $description; ?></td>
+                            <td>
+                                <?php 
+                                if($amount < 0) 
+                                { 
+                                    $totalExpense += $amount; 
+                                    $amount = 'R$ ' . number_format($amount, 2, ',', '.');
+                                    echo "<span style='color:red;'>$amount</span>"; 
+                                } 
+                                else 
+                                { 
+                                    $totalIncome += $amount;
+                                    $amount = 'R$ ' . number_format($amount, 2, ',', '.');
+                                    echo "<span style='color:green;'>$amount</span>"; 
+                                } 
+                                ?>
+                            </td>
+                        </tr>
+                    <?php 
+                    }
+                    ?>
+                <?php 
+                } 
+                ?>
             </tbody>
             <tfoot>
                 <tr>
                     <th colspan="3">Total Income:</th>
-                    <td><!-- TODO --></td>
+                    <td style="color: green;"><b><?php echo 'R$ ' . number_format($totalIncome, 2, ',', '.'); ?></b></td>
                 </tr>
                 <tr>
                     <th colspan="3">Total Expense:</th>
-                    <td><!-- TODO --></td>
+                    <td style="color: red;"><b><?php echo 'R$ ' . number_format($totalExpense, 2, ',', '.'); ?></b></td>
                 </tr>
                 <tr>
                     <th colspan="3">Net Total:</th>
-                    <td><!-- TODO --></td>
+                    <td><b><?php echo 'R$ ' . number_format($totalIncome + $totalExpense, 2, ',', '.'); ?></b></td>
                 </tr>
             </tfoot>
         </table>
