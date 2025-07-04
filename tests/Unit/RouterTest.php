@@ -72,7 +72,7 @@ class RouterTest extends TestCase
 
     /** 
      * @test 
-     * @dataProvider routeNotFoundCases
+     * @dataProvider \Tests\DataProviders\RouterDataProvider::routeNotFoundCases
      */
 
     // Teste para verificar a exception RouteNotFoundException
@@ -99,19 +99,4 @@ class RouterTest extends TestCase
         $this->expectException(RouteNotFoundException::class);
         $this->router->resolve($requestUri, $requestMethod);
     }
-
-    // DataProvider (declarado acima) para o teste routeNotFoundCases
-    // Este método retorna um array de arrays, cada um contendo
-    // um URI de solicitação e um método de solicitação que deve disparar
-    // uma RouteNotFoundException
-    public function routeNotFoundCases(): array
-    {
-        return [
-            ['/users', 'put'],
-            ['/invoices', 'post'],
-            ['/users', 'get'],
-            ['/users', 'post'],
-        ];
-    }
-
 }
