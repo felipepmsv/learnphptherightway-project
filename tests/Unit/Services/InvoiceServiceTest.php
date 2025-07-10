@@ -46,4 +46,39 @@ class InvoiceServiceTest extends TestCase
 
     }
 
+    /** @test */
+    public function it_sends_receipt_email_when_invoice_is_processed(): void
+    {
+        // As anotações abaixo são para o PHPStorm entender que 
+        // SalesTaxService, PaymentGatewayService e EmailService 
+        // são mocks, sem elas o VSCode não consegue entender,
+        // indicando erro !!!
+
+        /** @var SalesTaxService&\PHPUnit\Framework\MockObject\MockObject */
+        $salesTaxServiceMock = $this->createMock(SalesTaxService::class);
+        /** @var PaymentGatewayService&\PHPUnit\Framework\MockObject\MockObject */
+        $gatewayServiceMock  = $this->createMock(PaymentGatewayService::class);
+        /** @var EmailService&\PHPUnit\Framework\MockObject\MockObject */
+        $emailServiceMock    = $this->createMock(EmailService::class);
+
+        $gatewayServiceMock->method('charge')->willReturn(true);
+
+        $emailServiceMock
+            ->expects($this->once())
+            ->method('send')
+            ->with(['name' => 'Gio'], 'receipt');
+
+        // GIVEN invoice service
+        $invoiceService = new InvoiceService($salesTaxServiceMock, $gatewayServiceMock, $emailServiceMock);
+
+        $customer = ['name' => 'Gio'];
+        $amount = 150;
+
+        // WHEN process is called
+        $result= $invoiceService->process($customer, $amount);
+
+        // THEN assert receipt email is sent
+        $this->assertTrue($result);
+        
+    }
 }
