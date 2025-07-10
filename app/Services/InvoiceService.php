@@ -6,22 +6,30 @@ namespace App\Services;
 
 class InvoiceService
 {
-    public function process(array $customer, float $amount): bool
+    public function __construct(
+        private SalesTaxService $salesTaxService,
+        private PaymentGatewayService $gatewayService,
+        private EmailService $emailService
+    ) 
     {
-        $salesTaxService = new SalesTaxService();
-        $gatewayService  = new PaymentGatewayService();
-        $emailService    = new EmailService();
+    }
+
+    public function process(array $customer, float $amount): bool
+    {        
+        //$salesTaxService = new SalesTaxService();
+        //$gatewayService  = new PaymentGatewayService();
+        //$emailService    = new EmailService();
 
         // 1. calculate sales tax
-        $tax = $salesTaxService->calculate($amount, $customer);
+        $tax = $this->salesTaxService->calculate($amount, $customer);
 
         // 2. process invoice
-        if (! $gatewayService->charge($customer, $amount, $tax)) {
+        if (! $this->gatewayService->charge($customer, $amount, $tax)) {
             return false;
         }
 
         // 3. send receipt
-        $emailService->send($customer, 'receipt');
+        $this->emailService->send($customer, 'receipt');
 
         return true;
     }
