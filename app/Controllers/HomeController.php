@@ -12,6 +12,8 @@ class HomeController
 {
     public function index(): View
     {
+        // Exemplo de chamada ao InvoiceService usando 
+        // contêiner de dependências
         App::$container->get(InvoiceService::class)->process([], 25);
 
         return View::make('index');
