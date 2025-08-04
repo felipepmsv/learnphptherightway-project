@@ -13,29 +13,10 @@ use App\Services\EmailService;
 class App
 {
     private static DB $db;
-    public static Container $container; // Container for dependency injection 
-
+    
     public function __construct(protected Router $router, protected array $request, protected Config $config)
     {
-        static::$db = new DB($config->db ?? []);        
-        static::$container = new Container(); // Initialize the container
-
-        // Register InvoiceService with its dependencies
-        static::$container->set(
-            InvoiceService::class, 
-            function(Container $c) {
-                return new InvoiceService(
-                    $c->get(SalesTaxService::class),
-                    $c->get(PaymentGatewayService::class),
-                    $c->get(EmailService::class)
-                );
-            }
-        );
-
-        static::$container->set(SalesTaxService::class, fn() => new SalesTaxService());
-        static::$container->set(PaymentGatewayService::class, fn() => new PaymentGatewayService());
-        static::$container->set(EmailService::class, fn() => new EmailService());
-
+        static::$db = new DB($config->db ?? []);
     }
 
     public static function db(): DB

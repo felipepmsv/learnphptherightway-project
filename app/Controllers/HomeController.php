@@ -7,6 +7,7 @@ namespace App\Controllers;
 use App\App;
 use App\Services\InvoiceService;
 use App\View;
+use App\Container;
 
 class HomeController
 {
@@ -14,7 +15,7 @@ class HomeController
     {
         // Exemplo de chamada ao InvoiceService usando 
         // contêiner de dependências
-        App::$container->get(InvoiceService::class)->process([], 25);
+        (new Container())->get(InvoiceService::class)->process([], 25);
 
         return View::make('index');
     }
