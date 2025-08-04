@@ -11,11 +11,15 @@ use App\Container;
 
 class HomeController
 {
+    public function __construct(private InvoiceService $invoiceService)
+    {
+    }
+
     public function index(): View
     {
-        // Exemplo de chamada ao InvoiceService usando 
-        // contêiner de dependências
-        (new Container())->get(InvoiceService::class)->process([], 25);
+        // Exemplo de chamada ao InvoiceService usando
+        // contêiner de dependências        
+        $this->invoiceService->process([], 25);
 
         return View::make('index');
     }
