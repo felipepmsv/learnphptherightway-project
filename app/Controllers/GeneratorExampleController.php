@@ -15,11 +15,11 @@ class GeneratorExampleController
 
     public function index()
     {
-        $tickets = $this->ticketModel->all();
+        $numbers = range(1, 3000000);
 
-        foreach($tickets as $ticket) {
-            echo $ticket['id'] . ': ' . substr($ticket['content'], 0, 15) . '<br />';
-        }
+        echo '<pre>';
+        print_r($numbers);
+        echo '</pre>';
     }
 
     private function lazyRange(int $start, int $end): Generator
