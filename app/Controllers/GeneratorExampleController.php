@@ -15,15 +15,15 @@ class GeneratorExampleController
 
     public function index()
     {
-        $numbers = range(1, 3000000);
+        $numbers = $this->lazyRange(1, 3000000);
 
-        echo '<pre>';
-        print_r($numbers);
-        echo '</pre>';
+        foreach($numbers as $key => $number) {
+            echo $key . ': ' . $number . '<br />';
+        }
     }
 
     private function lazyRange(int $start, int $end): Generator
-    {
+    {        
         for ($i = $start; $i <= $end; $i++) {
             yield $i;
         }
