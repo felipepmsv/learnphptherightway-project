@@ -15,8 +15,8 @@ class GeneratorExampleController
 
     public function index()
     {
-        echo '<pre>';
-        print_r($this->ticketModel->all());
-        echo '</pre>';
+        foreach ($this->ticketModel->all() as $ticket) {
+            echo $ticket['id'] . ': ' . $ticket['title'] . '<br />';
+        }
     }
 }
