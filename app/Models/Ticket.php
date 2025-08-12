@@ -9,13 +9,13 @@ use Generator;
 
 class Ticket extends Model
 {
-    public function all(): Generator
+    public function all(): array
     {
         $stmt = $this->db->query(
-            'SELECT id, title, content
+            'SELECT *
              FROM tickets'
         );
 
-        return $this->fetchLazy($stmt);
+        return $stmt->fetchAll();        
     }
 }

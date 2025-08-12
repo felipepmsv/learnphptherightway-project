@@ -15,17 +15,8 @@ class GeneratorExampleController
 
     public function index()
     {
-        $numbers = $this->lazyRange(1, 10);
-
-        foreach($numbers as $key => $number) {
-            echo $key . ': ' . $number . '<br />';
-        }
-    }
-
-    private function lazyRange(int $start, int $end): Generator
-    {        
-        for ($i = $start; $i <= $end; $i++) {
-            yield $i * 5;
-        }
+        echo '<pre>';
+        print_r($this->ticketModel->all());
+        echo '</pre>';
     }
 }
