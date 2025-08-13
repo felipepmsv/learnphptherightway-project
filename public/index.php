@@ -2,31 +2,14 @@
 
 declare(strict_types = 1);
 
-use App\App;
-use App\Config;
-use App\Container;
-use App\Controllers\GeneratorExampleController;
-use App\Controllers\HomeController;
-use App\Router;
+use App\Invoice;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
-$dotenv->load();
+$invoice1 = new Invoice();
+$invoice2 = $invoice1;
 
-define('STORAGE_PATH', __DIR__ . '/../storage');
-define('VIEW_PATH', __DIR__ . '/../views');
+echo 'Unsetting Invoice 1' . PHP_EOL;
+unset($invoice1);
 
-$container = new Container();
-$router    = new Router($container);
-
-$router
-    ->get('/', [HomeController::class, 'index'])
-    ->get('/examples/generator', [GeneratorExampleController::class, 'index']);
-
-(new App(
-    $container,
-    $router,
-    ['uri' => $_SERVER['REQUEST_URI'], 'method' => $_SERVER['REQUEST_METHOD']],
-    new Config($_ENV)
-))->run();
+var_dump($invoice2);
